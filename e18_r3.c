@@ -11,13 +11,12 @@
 #include <inttypes.h>
 #include <omp.h>
 
-#define pprintf(str, ...) \
-    fprintf(stderr, "%s:%u (%s): %s: %s\n", __FILE__, __LINE__, __func__, \
-            str, ##__VA_ARGS__, strerror(errno))
 
 #define pprintf_abort(str, ...) \
     do { \
-        pprintf(str, ##__VA_ARGS__); \
+        fprintf(stderr, "%s:%u (%s): ", __FILE__, __LINE__, __func__); \
+        fprintf(stderr, str, ##__VA_ARGS__); \
+        fprintf(stderr, ": %s\n", strerror(errno)); \
         exit(EXIT_FAILURE); \
     } while (0)
 
