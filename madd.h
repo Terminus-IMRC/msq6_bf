@@ -56,21 +56,27 @@
 #define _mm256_maskz_maddwd _mm256_maskz_madd_epi16
 
 /*
- * intrin            insn     conformance lat(skx) th(skx) port(skx) lat(knl) th(knl) port(knl)
- *    _mm_srli_si128  psrldq  SSE2         1        1      p5        13       13      FP0
- *    _mm_srli_epi64  psrlq   SSE2         1        0.5    p01       13       13      FP0
- * _mm256_srli_si256 vpsrldq  AVX2         1        1      p5        11        8      FP0
- * _mm256_srli_epi64 vpsrlq   AVX2         1        0.5    p01       11        8      FP0
- * _mm512_srli_epi64 vpsrlq   AVX512F      1        ?      p0         2?       1?     FP0
- * _mm_mul_epi32      pmuldq  SSE4.1       5        0.5    p01        6        2      FP0
- * _mm_mul_epu32      pmuludq SSE2         5        0.5    p01        6        0.5    FP0/1
- * _mm256_mul_epi32  vpmuldq  AVX2         5        0.5    p01        6        0.5    FP0/1
- * _mm256_mul_epu32  vpmuludq AVX2         5        0.5    p01        6        0.5    FP0/1
- * _mm512_mul_epi32  vpmuldq  AVX512F     10        2      2p0        6        0.5    FP0/1
- * _mm512_mul_epu32  vpmuludq AVX512F      5        1      p0         6        0.5    FP0/1
- * _mm_add_epi64      paddq   SSE2         1        0.33   p015       2        0.5    FP0/1
- * _mm256_add_epi64  vpaddq   AVX2         1        0.33   p015       2        0.5    FP0/1
- * _mm512_add_epi64  vpaddq   AVX512F      1        0.5    p05        2        0.5    FP0/1
+ * intrin               insn       conformance lat(skx) th(skx) port(skx) lat(knl) th(knl) port(knl)
+ *    _mm_madd_epi16     pmaddwd   SSE2         5        0.5    p01        7        2      FP0
+ * _mm256_madd_epi16    vpmaddwd   AVX2         5        0.5    p01
+ * _mm512_madd_epi16    vpmaddwd   AVX512BW     5        1      p0
+ *    _mm_maddubs_epi16  pmaddubsw SSSE3        5        0.5    p01        7        2      FP0
+ * _mm256_maddubs_epi16 vpmaddubsw AVX2         5        0.5    p01       16        9      FP0
+ * _mm512_maddubs_epi16 vpmaddubsw AVX512BW     5        1      p0
+ *    _mm_srli_si128     psrldq    SSE2         1        1      p5        13       13      FP0
+ *    _mm_srli_epi64     psrlq     SSE2         1        0.5    p01       13       13      FP0
+ * _mm256_srli_si256    vpsrldq    AVX2         1        1      p5        11        8      FP0
+ * _mm256_srli_epi64    vpsrlq     AVX2         1        0.5    p01       11        8      FP0
+ * _mm512_srli_epi64    vpsrlq     AVX512F      1        ?      p0         2?       1?     FP0
+ *    _mm_mul_epi32      pmuldq    SSE4.1       5        0.5    p01        6        2      FP0
+ *    _mm_mul_epu32      pmuludq   SSE2         5        0.5    p01        6        0.5    FP0/1
+ * _mm256_mul_epi32     vpmuldq    AVX2         5        0.5    p01        6        0.5    FP0/1
+ * _mm256_mul_epu32     vpmuludq   AVX2         5        0.5    p01        6        0.5    FP0/1
+ * _mm512_mul_epi32     vpmuldq    AVX512F     10        2      2p0        6        0.5    FP0/1
+ * _mm512_mul_epu32     vpmuludq   AVX512F      5        1      p0         6        0.5    FP0/1
+ *    _mm_add_epi64      paddq     SSE2         1        0.33   p015       2        0.5    FP0/1
+ * _mm256_add_epi64     vpaddq     AVX2         1        0.33   p015       2        0.5    FP0/1
+ * _mm512_add_epi64     vpaddq     AVX512F      1        0.5    p05        2        0.5    FP0/1
  */
 
 static inline
